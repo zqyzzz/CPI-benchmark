@@ -1,3 +1,21 @@
+---
+license: cc-by-nc-nd-4.0
+configs:
+  - config_name: general
+    data_files:
+      - split: train
+        path: CPI_general_benchmark/CPI_general_benchmark-*.parquet
+  - config_name: practical
+    data_files:
+      - split: train
+        path: CPI_practical_benchmark/CPI_practical_benchmark-*.parquet
+  - config_name: intelligent
+    data_files:
+      - split: train
+        path: CPI_intelligent_benchmark/CPI_intelligent_benchmark-*.parquet
+---
+
+
 # CPI-Bench
 
 [![Hugging Face Dataset](https://img.shields.io/badge/🤗-Dataset-yellow)](https://huggingface.co/datasets/TaobaoTmall-AlgorithmProducts/CPI-benchmark)
@@ -7,14 +25,14 @@
 
 CPI-Bench is a comprehensive suite of benchmarks designed to evaluate whether an image
 generation/editing model is truly capable of handling diverse, real-world, and
-knowledge-intensive tasks. It consists of four complementary subsets:
+knowledge-intensive tasks. It consists of three complementary subsets:
 
 | Benchmark | Description | Data Files |
 |---|---|---|
 | **CPI-General-Benchmark** | General-purpose image editing tasks covering a wide range of task types | `CPI_general_benchmark/CPI_general_benchmark-*.parquet` |
 | **CPI-Practical-Benchmark** | Image editing tasks grounded in everyday, real-life scenarios | `CPI_practical_benchmark/CPI_practical_benchmark-*.parquet` |
 | **CPI-Intelligent-Benchmark** | Image editing tasks that require domain knowledge and multi-step reasoning, with reference input image(s) | `CPI_intelligent_benchmark-*.parquet` |
-parquet` |
+
 
 Each sample provides an editing/generation instruction (and, for image-editing tasks,
 one or more reference images). Models are expected to produce an output image
@@ -23,9 +41,8 @@ quality dimensions.
 
 ## ✨ Key Features
 
-- **Four Complementary Subsets**: covers general-purpose editing, life-scenario
-  editing, and knowledge-intensive reasoning for both image-editing (i2i) and
-  text-to-image (t2i) settings.
+- **Three Complementary Subsets**: covers general-purpose editing, life-scenario
+  editing, and knowledge-intensive reasoning for image-editing (i2i) settings.
 - **Multi-Image Input Support**: `source` fields may contain one or multiple
   reference images, supporting complex multi-image editing scenarios.
 - **Bilingual Instructions**: Chinese and English instructions are provided for
@@ -135,8 +152,7 @@ penalty for factual/knowledge errors.
 
 First, generate your model's outputs for each sample. If you are not sure which row
 corresponds to which image(s)/instruction, use the export helper first — it
-auto-detects the dataset schema (image-editing vs. text-to-image) and works for all
-four subsets:
+auto-detects the dataset schema and works for all three subsets:
 
 ```bash
 python bench_eval_code/export_samples.py \
@@ -147,7 +163,7 @@ python bench_eval_code/export_samples.py \
 ```
 
 This produces:
-- `source_images/` — reference input images per sample (skipped entirely for the t2i subset, which has no reference images)
+- `source_images/` — reference input images per sample
 - `samples.jsonl` — per-sample metadata: `sample_index`, `id`, `task`, `instruction`, `rationale` (if present)
 - `result_template.jsonl` — a template result file; fill in the `result` field with your model's output path after inference
 
@@ -203,10 +219,6 @@ Each script produces two files in `--output_dir`:
 - **`cases.jsonl`** — per-sample scoring details (per-dimension scores + raw VLM responses)
 - **`summary.json`** — aggregated scores, broken down by task type / domain / dimension
 
-For the t2i subset, `summary.json` additionally includes:
-- `overall_avg_score_pct` — the 1–5 score mapped to a 0–100 percentage scale
-- `overall_perfect_rate` — the fraction of samples that achieve the maximum score (5) on both dimensions
-- `by_domain` — scores aggregated by top-level domain (the part of `expert_domain` before the `-`)
 
 ## Features
 
