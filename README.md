@@ -1,20 +1,3 @@
----
-license: cc-by-nc-nd-4.0
-configs:
-  - config_name: general
-    data_files:
-      - split: train
-        path: CPI_general_benchmark/CPI_general_benchmark-*.parquet
-  - config_name: practical
-    data_files:
-      - split: train
-        path: CPI_practical_benchmark/CPI_practical_benchmark-*.parquet
-  - config_name: intelligent
-    data_files:
-      - split: train
-        path: CPI_intelligent_benchmark/CPI_intelligent_benchmark-*.parquet
----
-
 
 # CPI-Bench
 
