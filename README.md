@@ -243,4 +243,13 @@ By using this dataset, you agree to comply with the applicable license terms.
 If you find CPI-Bench useful for your research, please consider citing:
 
 ```bibtex
+@misc{zhou2026cpibenchcomprehensivepracticalintelligent,
+      title={CPI-Bench: A Comprehensive, Practical and Intelligent Benchmark for Real-World Image Editing}, 
+      author={Qinye Zhou and Jun Zheng and Yongchao Du and Yuan Wang and Zhengrui Chen and Zuan Gao and Taihang Hu and Chao Lin and Yefeng Shen and Xingjian Wang and Zhao Wang and Zhengtao Wu and Xiaoli Xu and Zhengze Xu and Hao Yan and Denghui Yang and Yuhang Yu and Huayu Zhang and Mingzhou Zhang and Mengting Chen},
+      year={2026},
+      eprint={2608.14546},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2608.14546}, 
+}
 ```
